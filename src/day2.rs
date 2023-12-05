@@ -18,7 +18,7 @@ pub fn solve(input: Vec<String>) -> String {
     let sum = ids.iter().fold(0, |acc, &x| acc + x);
     let power_sum = cubes.iter().fold(0, |acc, &x| acc + x);
 
-    return format!("{}, {}", sum, power_sum);
+    format!("{}, {}", sum, power_sum)
 }
 
 fn parse(line: String) -> (u32, u32, u32, u32) {

@@ -1,20 +1,27 @@
+use advent_of_code_2023::now;
 use rand::Rng;
 use std::{collections::BTreeMap, env, fs};
 
 mod day1;
 mod day2;
+mod day3;
 
 pub fn main() {
+    let start = now::millis();
+
     let args: Vec<String> = env::args().collect();
-    let mut map: BTreeMap<String, fn(input: Vec<String>) -> String> = BTreeMap::new();
-    map.insert("1".to_string(), day1::solve);
-    map.insert("2".to_string(), day2::solve);
+    let mut day_resolver_map: BTreeMap<&str, fn(input: Vec<String>) -> String> = BTreeMap::new();
+    day_resolver_map.insert("1", day1::solve);
+    day_resolver_map.insert("2", day2::solve);
+    day_resolver_map.insert("3", day3::solve);
+
     println!("## Advent Of Code 2023 by @sadkebab 🎅🏻 ##");
+    println!();
 
     if args.len() > 1 {
-        let day = args[1].clone();
-        if let Some(resolver) = map.get(&day) {
-            let input = get_input(day.clone());
+        let day = args[1].as_str();
+        if let Some(resolver) = day_resolver_map.get(day) {
+            let input = get_input(day);
             let solution = resolver(input);
             let emoji = random_emoji();
             println!("{} Day {} Solution: {}", emoji, day, solution);
@@ -23,16 +30,20 @@ pub fn main() {
             return;
         }
     } else {
-        for (day, resolver) in map.into_iter() {
-            let input = get_input(day.clone());
+        for (day, resolver) in day_resolver_map.into_iter() {
+            let input = get_input(day);
             let solution = resolver(input);
             let emoji = random_emoji();
             println!("{} Day {} Solution: {}", emoji, day, solution);
         }
     }
+
+    let end = now::millis();
+    println!();
+    println!("Executed in {}ms", end - start);
 }
 
-fn get_input(day: String) -> Vec<String> {
+fn get_input(day: &str) -> Vec<String> {
     let file_path = format!("./inputs/day-{}.txt", day);
     return match fs::read_to_string(&file_path) {
         Ok(content) => content.split_terminator("\n").map(String::from).collect(),

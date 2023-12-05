@@ -19,7 +19,7 @@ pub fn solve(input: Vec<String>) -> String {
 
     let wrong_sum = wrong_nums.iter().fold(0, |acc, &x| acc + x);
     let correct_sum = correct_nums.iter().fold(0, |acc, &x| acc + x);
-    return format!("{}, {}", wrong_sum, correct_sum);
+    format!("{}, {}", wrong_sum, correct_sum)
 }
 
 fn parse(line: String) -> u32 {
