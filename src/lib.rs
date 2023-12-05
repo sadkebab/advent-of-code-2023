@@ -8,3 +8,13 @@ pub mod now {
         return duration.as_millis();
     }
 }
+
+pub mod util {
+    use std::collections::BTreeMap;
+
+    pub fn print_map(map: BTreeMap<usize, usize>) {
+        for (k, value) in map.into_iter() {
+            println!("{}: {}", k + 1, value);
+        }
+    }
+}

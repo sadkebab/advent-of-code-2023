@@ -34,7 +34,7 @@ fn parse(line: String) -> (u32, u32, u32, u32) {
     let sorties = normalized.split(", ");
 
     for sortie in sorties {
-        let parts: Vec<&str> = sortie.split(" ").collect();
+        let parts: Vec<&str> = sortie.split_whitespace().collect();
         let color = parts[1];
         let parsed = parts[0].parse::<u32>().unwrap();
 

@@ -5,6 +5,7 @@ use std::{collections::BTreeMap, env, fs};
 mod day1;
 mod day2;
 mod day3;
+mod day4;
 
 pub fn main() {
     let start = now::millis();
@@ -14,6 +15,7 @@ pub fn main() {
     day_resolver_map.insert("1", day1::solve);
     day_resolver_map.insert("2", day2::solve);
     day_resolver_map.insert("3", day3::solve);
+    day_resolver_map.insert("4", day4::solve);
 
     println!("## Advent Of Code 2023 by @sadkebab 🎅🏻 ##");
     println!();
